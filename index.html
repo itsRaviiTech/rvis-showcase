@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R-VIS | System Showcase</title>
+    <style>
+        :root {
+            --primary: #004d99; /* Adjust to match UMT colors if needed */
+            --secondary: #e6f2ff;
+            --text-main: #333;
+            --text-light: #666;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .section-title {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .screenshot {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-top: 1rem;
+        }
+        .tech-stack {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .tech-badge {
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>R-VIS</h1>
+        <p>Real-Time Data Validation and Inspection System</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="card">
+            <h2 class="section-title">About the Project</h2>
+            <p>R-VIS is an automated web platform developed to ensure data integrity for university management. It replaces inefficient, manual spreadsheet validation with a secure, real-time environment. Due to strict data privacy policies regarding student information, the live system is restricted to authorized personnel only. This page serves as a visual demonstration of the system's capabilities.</p>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Key Features</h2>
+            <ul>
+                <li><strong>Dynamic Template Engine:</strong> Reads validation rules directly from a Master Excel file.</li>
+                <li><strong>Machine Learning Integration:</strong> Utilizes fuzzy matching and Levenshtein distance for intelligent error correction suggestions.</li>
+                <li><strong>Privacy-First Architecture:</strong> Processes sensitive data entirely within the browser's RAM (transient processing).</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">System Interface</h2>
+            
+            <h3>1. Interactive Data Viewer</h3>
+            <p>A spreadsheet-like interface that highlights invalid data in real time, allowing users to make instant corrections.</p>
+            <img src="viewer.jpg" alt="Interactive Data Viewer Screenshot" class="screenshot">
+
+            <h3>2. ML-Powered Error Detection</h3>
+            <p>The system flags anomalies and suggests the most likely fixes to accelerate the validation workflow.</p>
+            <img src="ml-suggestions.jpg" alt="ML Suggestions Screenshot" class="screenshot">
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Technology Stack</h2>
+            <div class="tech-stack">
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">HTML5 / CSS3</span>
+                <span class="tech-badge">PHP (CodeIgniter)</span>
+                <span class="tech-badge">MySQL</span>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Developed as a Final Year Project | Universiti Malaysia Terengganu</p>
+    </footer>
+
+</body>
+</html>
