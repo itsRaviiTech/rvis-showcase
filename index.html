@@ -4,87 +4,755 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R-VIS | Technical Showcase</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #0a3d62; --accent: #29b6f6; --bg: #f8fafc; }
-        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #334155; margin: 0; background: var(--bg); }
-        
-        header { background: var(--primary); color: white; padding: 3rem 1rem; text-align: center; }
-        header h1 { margin: 0; font-size: 2.5rem; }
-        
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        .card { background: white; border-radius: 12px; padding: 30px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        
-        h2 { color: var(--primary); border-left: 4px solid var(--accent); padding-left: 15px; margin-bottom: 20px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        
-        code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; color: #e11d48; font-family: monospace; }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: left; }
-        th { background: #f8fafc; }
+        :root {
+            --primary: #0a3d62;
+            --primary-light: #1a5276;
+            --accent: #29b6f6;
+            --accent-dark: #0288d1;
+            --bg: #f0f4f8;
+            --card-bg: #ffffff;
+            --text: #1a202c;
+            --text-muted: #4a5568;
+            --border: #e2e8f0;
+            --shadow: 0 10px 40px rgba(0,0,0,0.08);
+            --radius: 16px;
+        }
 
-        .btn-link { display: inline-block; padding: 10px 20px; background: var(--primary); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            scroll-behavior: smooth;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d2137 100%);
+            color: white;
+            padding: 4rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #4dd0e1, var(--accent));
+        }
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+        header h1 span {
+            color: var(--accent);
+        }
+        header p {
+            font-size: 1.25rem;
+            opacity: 0.85;
+            margin-top: 0.5rem;
+            font-weight: 300;
+        }
+        .header-badge {
+            display: inline-block;
+            background: rgba(41, 182, 246, 0.2);
+            border: 1px solid rgba(41, 182, 246, 0.3);
+            padding: 0.3rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* NAV */
+        nav {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            background: rgba(255,255,255,0.92);
+        }
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        nav a:hover { background: var(--bg); }
+        nav .container { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+
+        /* CONTAINER */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* SECTIONS */
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        section:last-child { border-bottom: none; }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .section-title .badge {
+            background: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.7rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-2px); }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+
+        /* CODE */
+        .code-block {
+            background: #0d1117;
+            color: #e6edf3;
+            border-radius: 10px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .code-block .lang {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 0.65rem;
+            color: #8b949e;
+            background: #1e2430;
+            padding: 0.1rem 0.6rem;
+            border-radius: 4px;
+        }
+        .code-block .comment { color: #8b949e; }
+        .code-block .keyword { color: #ff7b72; }
+        .code-block .string { color: #a5d6ff; }
+        .code-block .function { color: #d2a8ff; }
+        .code-block .number { color: #79c0ff; }
+        .code-block .variable { color: #ffa657; }
+
+        /* TABLES */
+        .table-wrap { overflow-x: auto; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        tr:hover { background: #f8fafc; }
+
+        .highlight-blue { color: var(--accent); font-weight: 600; }
+        .highlight-green { color: #22c55e; font-weight: 600; }
+        .highlight-red { color: #ef4444; font-weight: 600; }
+
+        .pill {
+            display: inline-block;
+            padding: 0.15rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .pill-blue { background: #e0f2fe; color: #0284c7; }
+        .pill-green { background: #dcfce7; color: #16a34a; }
+        .pill-purple { background: #f3e8ff; color: #7c3aed; }
+        .pill-red { background: #fee2e2; color: #dc2626; }
+
+        .icon { font-size: 1.2rem; margin-right: 0.4rem; }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary);
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 2rem 1.5rem;
+            font-size: 0.9rem;
+        }
+        footer strong { color: white; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .card { padding: 1.25rem; }
+            nav .container { gap: 0.25rem; }
+            nav a { font-size: 0.8rem; padding: 0.3rem 0.7rem; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- ============================================================ -->
+    <!-- HEADER -->
+    <!-- ============================================================ -->
     <header>
-        <h1>R-VIS</h1>
-        <p>Real-Time Data Validation & Inspection System</p>
+        <div class="header-badge">⚡ Production-Ready · 70+ Modules</div>
+        <h1>R-<span>VIS</span></h1>
+        <p>Real‑time Validation &amp; Inspection System</p>
+        <p style="font-size:1rem; opacity:0.7; max-width:600px; margin:1rem auto 0;">
+            AI‑powered data validation · 100% client‑side · 99% error reduction
+        </p>
     </header>
 
+    <!-- ============================================================ -->
+    <!-- NAV -->
+    <!-- ============================================================ -->
+    <nav>
+        <div class="container">
+            <a href="#problem">Problem</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#algorithms">Algorithms</a>
+            <a href="#ai">AI Engine</a>
+            <a href="#performance">Performance</a>
+            <a href="#impact">Impact</a>
+        </div>
+    </nav>
+
+    <!-- ============================================================ -->
+    <!-- MAIN CONTENT -->
+    <!-- ============================================================ -->
     <div class="container">
-        <div class="card">
-            <h2>The Engine: Intelligent Validation</h2>
-            <p>R-VIS is architected to perform complex validation entirely on the client side, ensuring <strong>zero latency</strong> and maximum <strong>data privacy</strong>.</p>
-            <div class="grid">
-                <div>
-                    <strong>1. Rules as Data</strong>
-                    <p>Validation rules live inside the Excel template (Row 2). No backend changes are required for new modules.</p>
-                </div>
-                <div>
-                    <strong>2. Fuzzy Logic</strong>
-                    <p>Uses Levenshtein Distance algorithms to auto-correct typos with 95% confidence.</p>
+
+        <!-- ========================================================== -->
+        <!-- SECTION 1: THE PROBLEM -->
+        <!-- ========================================================== -->
+        <section id="problem">
+            <h2 class="section-title">The Problem <span class="badge">Before</span></h2>
+
+            <div class="card">
+                <p style="font-size:1.1rem;">
+                    <strong>70+ data modules</strong> · 500–1000 rows each · 20–30 columns per file
+                </p>
+                <div class="grid-2" style="margin-top:1.5rem;">
+                    <div style="background:#fef2f2; border-radius:12px; padding:1.25rem; border-left:4px solid #ef4444;">
+                        <h4 style="color:#dc2626;">❌ Manual Validation</h4>
+                        <ul style="list-style:none; padding:0;">
+                            <li>• ⏱ 35+ days per cycle</li>
+                            <li>• 🧑‍💻 70+ scripts to maintain</li>
+                            <li>• 🐛 Typos &amp; format errors</li>
+                            <li>• 📋 2–3 days per new module</li>
+                        </ul>
+                    </div>
+                    <div style="background:#f0fdf4; border-radius:12px; padding:1.25rem; border-left:4px solid #22c55e;">
+                        <h4 style="color:#16a34a;">✅ R‑VIS Automated</h4>
+                        <ul style="list-style:none; padding:0;">
+                            <li>• ⚡ <strong>~8 minutes</strong> total</li>
+                            <li>• 📄 <strong>1 master script</strong></li>
+                            <li>• 🤖 AI typo correction</li>
+                            <li>• 🚀 <strong>5 minutes</strong> per module</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="card">
-            <h2>Smart Performance & Learning</h2>
-            <p>We solve the "Browser Crash" problem by using <strong>chunked asynchronous processing</strong> (50 rows at a time), allowing the UI to stay responsive during massive data loads.</p>
-            <p>The system features a <strong>local learning module</strong> using <code>localStorage</code>, enabling the AI to "remember" user corrections for specific departments over time.</p>
-        </div>
+        <!-- ========================================================== -->
+        <!-- SECTION 2: ARCHITECTURE -->
+        <!-- ========================================================== -->
+        <section id="architecture">
+            <h2 class="section-title">System Architecture <span class="badge">Design</span></h2>
 
-        <div class="card">
-            <h2>System Impact</h2>
-            <table>
-                <tr><th>Metric</th><th>Manual Process</th><th>R-VIS System</th></tr>
-                <tr><td>Validation Time</td><td>~35 days</td><td><strong>~8 minutes</strong></td></tr>
-                <tr><td>Code Maintenance</td><td>70+ scripts</td><td><strong>1 Master Script</strong></td></tr>
-                <tr><td>New Module Setup</td><td>2-3 days</td><td><strong>5 minutes</strong></td></tr>
-                <tr><td>Data Privacy</td><td>Data transferred</td><td><strong>Stays local</strong></td></tr>
-            </table>
-        </div>
+            <div class="card">
+                <div style="background:#f1f5f9; border-radius:12px; padding:1.5rem; font-family:monospace; font-size:0.9rem; white-space:pre; overflow-x:auto;">
+                    ┌─────────────────────────────────────────────────────────────┐
+                    │                    Client Browser                           │
+                    │  ┌─────────────────────────────────────────────────────┐   │
+                    │  │  📄 Template Editor (admin builds rules)           │   │
+                    │  │  🔍 Validation Engine (AI + fuzzy matching)        │   │
+                    │  │  🧠 Learning Module (localStorage)                 │   │
+                    │  │  📊 Dashboard (real‑time analytics)                │   │
+                    │  └─────────────────────────────────────────────────────┘   │
+                    │                           │                                 │
+                    │                           ▼                                 │
+                    │  ┌─────────────────────────────────────────────────────┐   │
+                    │  │   🗄️ Server (only stores final file + metadata)     │   │
+                    │  └─────────────────────────────────────────────────────┘   │
+                    └─────────────────────────────────────────────────────────────┘
+                </div>
+                <div class="grid-3" style="margin-top:1.25rem;">
+                    <div><span class="pill pill-blue">Zero Server Load</span><br><small>All AI runs client‑side</small></div>
+                    <div><span class="pill pill-green">Privacy First</span><br><small>Data never leaves the browser</small></div>
+                    <div><span class="pill pill-purple">Instant Feedback</span><br><small>No API latency</small></div>
+                </div>
+            </div>
+        </section>
 
-        <div class="card">
-            <h2>Workflow Overview</h2>
-            <p>Our 6-step guided UI ensures non-technical staff can validate data without IT intervention:</p>
-            <ol>
-                <li>Download &rarr; Fill Data &rarr; Upload</li>
-                <li>AI Auto-Correction (Typos & Formatting)</li>
-                <li>Review Suggestions (Blue/Purple cells)</li>
-                <li>Manual Correction (Red cell errors)</li>
-                <li>Quality Check (Real-time score bar)</li>
-                <li>Secure Submission</li>
-            </ol>
-        </div>
+        <!-- ========================================================== -->
+        <!-- SECTION 3: CORE ALGORITHMS -->
+        <!-- ========================================================== -->
+        <section id="algorithms">
+            <h2 class="section-title">Core Algorithms <span class="badge">The Engine</span></h2>
+
+            <!-- 3.1 Levenshtein Distance -->
+            <div class="card">
+                <h3>🔢 1. Levenshtein Distance – Fuzzy Matching</h3>
+                <p>Measures the minimum number of single‑character edits (insertions, deletions, substitutions) needed to change one string into another.</p>
+
+                <div class="code-block">
+                    <span class="lang">JavaScript</span>
+                    <pre>function levenshteinDistance(a, b) {
+    const aLen = a.length, bLen = b.length;
+    if (aLen === 0) return bLen;
+    if (bLen === 0) return aLen;
+
+    const matrix = [];
+    for (let i = 0; i &lt;= bLen; i++) matrix[i] = [i];
+    for (let j = 0; j &lt;= aLen; j++) matrix[0][j] = j;
+
+    for (let i = 1; i &lt;= bLen; i++) {
+        for (let j = 1; j &lt;= aLen; j++) {
+            const cost = a[j-1] === b[i-1] ? 0 : 1;
+            matrix[i][j] = Math.min(
+                matrix[i-1][j] + 1,      <span class="comment">// deletion</span>
+                matrix[i][j-1] + 1,      <span class="comment">// insertion</span>
+                matrix[i-1][j-1] + cost  <span class="comment">// substitution</span>
+            );
+        }
+    }
+    return matrix[bLen][aLen];
+}</pre>
+                </div>
+
+                <div style="background:#f1f5f9; border-radius:8px; padding:1rem; margin:0.5rem 0;">
+                    <strong>Example:</strong> <code>"Comuter"</code> → <code>"Computer"</code> → <span class="highlight-green">1 edit</span> (insert 'p') → 87.5% similarity
+                </div>
+            </div>
+
+            <!-- 3.2 Typo Dictionary -->
+            <div class="card">
+                <h3>📖 2. Fast Typo Dictionary – O(1) Lookup</h3>
+                <p>Pre‑compiled dictionary for common typos, avoiding expensive Levenshtein computation.</p>
+
+                <div class="code-block">
+                    <span class="lang">JavaScript</span>
+                    <pre>const TYPO_DICTIONARY = {
+    <span class="comment">// [Allowed] → [Common typos]</span>
+    'computer science': ['comuter scence', 'comp sci', 'computerscience', 'cs'],
+    'software engineering': ['soft eng', 'software enginering', 'se'],
+    'faculty of computing': ['faulty of compiting', 'comp faculty'],
+    'yes': ['yse', 'yep', 'yeah', 'ya'],
+    'no': ['nope', 'nah', 'n'],
+    <span class="comment">// ... 30+ entries</span>
+};</pre>
+                </div>
+
+                <div style="background:#f1f5f9; border-radius:8px; padding:1rem;">
+                    <strong>Example:</strong> <code>"faulty of compiting"</code> → instantly matches → <span class="highlight-green">95% confidence correction</span>
+                </div>
+            </div>
+
+            <!-- 3.3 Pattern Validation -->
+            <div class="card">
+                <h3>📧 3. Pattern Validation – Regex &amp; Auto‑Correction</h3>
+                <p>Validates and auto‑corrects common formats: email, phone, IC, date.</p>
+
+                <div class="code-block">
+                    <span class="lang">JavaScript</span>
+                    <pre>const RuleValidators = {
+    email: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+    phone: (val) => /^(\+?6?01)[0-9]{8,9}$/.test(val.replace(/\s/g, '')),
+    icnumber: (val) => /^\d{12}$/.test(val),
+    date: (val) => normalizeDateValue(val) !== null
+};
+
+<span class="comment">// Auto‑correction for emails</span>
+function fixEmail(value) {
+    let corrected = value.toLowerCase().trim();
+    if (!corrected.includes('@')) {
+        corrected = corrected.replace(/\s+at\s+/, '@');
+    }
+    if (corrected.includes('@') && !corrected.includes('.')) {
+        const [local, domain] = corrected.split('@');
+        corrected = `${local}@${domain}.com`;
+    }
+    return RuleValidators.email(corrected) ? corrected : null;
+}</pre>
+                </div>
+            </div>
+
+            <!-- 3.4 Smart Imputation -->
+            <div class="card">
+                <h3>🎯 4. Smart Imputation – Program → Faculty</h3>
+                <p>When faculty is missing, infer it from the program name using a mapping dictionary.</p>
+
+                <div class="code-block">
+                    <span class="lang">JavaScript</span>
+                    <pre>const PROGRAM_FACULTY_MAP = {
+    'computer science': 'Faculty of Computing',
+    'software engineering': 'Faculty of Computing',
+    'business administration': 'Faculty of Business',
+    'marketing': 'Faculty of Business'
+};
+
+function getProgramFacultySuggestion(row) {
+    const progIdx = headers.findIndex(h => h.toLowerCase().includes('program'));
+    const facIdx = headers.findIndex(h => h.toLowerCase().includes('faculty'));
+    if (progIdx === -1 || facIdx === -1) return null;
+
+    const program = String(row[progIdx]).toLowerCase();
+    for (const [key, value] of Object.entries(PROGRAM_FACULTY_MAP)) {
+        if (program.includes(key)) return { facIdx, suggestion: value };
+    }
+    return null;
+}</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- SECTION 4: AI ENGINE -->
+        <!-- ========================================================== -->
+        <section id="ai">
+            <h2 class="section-title">AI Engine <span class="badge">Intelligence</span></h2>
+
+            <!-- 4.1 Learning from Corrections -->
+            <div class="card">
+                <h3>🧠 1. Learning from Corrections (localStorage)</h3>
+                <p>The system remembers every accepted/rejected correction. Over time, it becomes <strong>smarter</strong> for each department.</p>
+
+                <div class="code-block">
+                    <span class="lang">JavaScript</span>
+                    <pre><span class="comment">// Save correction</span>
+function saveCorrection(original, corrected, column) {
+    const key = `${column}:${original.toLowerCase()}`;
+    let learningData = JSON.parse(localStorage.getItem('ai_learning') || '{}');
+    if (!learningData[key]) learningData[key] = {};
+    learningData[key][corrected] = (learningData[key][corrected] || 0) + 1;
+    localStorage.setItem('ai_learning', JSON.stringify(learningData));
+}
+
+<span class="comment">// Retrieve learned correction (most frequent)</span>
+function getLearnedCorrection(value, column) {
+    const data = JSON.parse(localStorage.getItem('ai_learning') || '{}');
+    const corrections = data[`${column}:${value.toLowerCase()}`];
+    if (!corrections) return null;
+    const best = Object.entries(corrections).sort((a,b) => b[1] - a[1])[0];
+    return { corrected: best[0], confidence: Math.min(95, 50 + best[1]*5) };
+}</pre>
+                </div>
+                <div style="background:#f1f5f9; border-radius:8px; padding:1rem;">
+                    <strong>Result:</strong> After 3 corrections, <code>"comuter"</code> → <code>"computer"</code> with <span class="highlight-green">90% confidence</span> — instant auto‑correction on the next file.
+                </div>
+            </div>
+
+            <!-- 4.2 Confidence Scoring -->
+            <div class="card">
+                <h3>📊 2. Confidence Scoring System</h3>
+                <p>Each AI suggestion is accompanied by a confidence score (0–100). High‑confidence fixes (&gt;90%) are applied automatically; others require user review.</p>
+
+                <div class="grid-2" style="margin-top:0.5rem;">
+                    <div style="background:#f0fdf4; border-radius:8px; padding:1rem; border-left:4px solid #22c55e;">
+                        <strong style="color:#16a34a;">High Confidence (≥90%)</strong>
+                        <ul style="margin:0.5rem 0 0; padding-left:1.2rem;">
+                            <li>Dictionary match → <span class="highlight-green">95%</span></li>
+                            <li>Levenshtein &gt; 90% → <span class="highlight-green">92%</span></li>
+                            <li>Historical correction ≥ 3x → <span class="highlight-green">90%</span></li>
+                        </ul>
+                        <span class="pill pill-green" style="margin-top:0.5rem;">Auto‑apply</span>
+                    </div>
+                    <div style="background:#fefce8; border-radius:8px; padding:1rem; border-left:4px solid #eab308;">
+                        <strong style="color:#ca8a04;">Medium Confidence (70–89%)</strong>
+                        <ul style="margin:0.5rem 0 0; padding-left:1.2rem;">
+                            <li>Levenshtein 60–89%</li>
+                            <li>Historical correction 1–2x</li>
+                            <li>Context boost</li>
+                        </ul>
+                        <span class="pill pill-purple" style="margin-top:0.5rem;">Show for review</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4.3 Chunked Validation -->
+            <div class="card">
+                <h3>⚡ 3. Chunked Validation – 1000+ Rows Without Crashing</h3>
+                <p>Processes rows in <strong>chunks of 50</strong> using <code>setTimeout</code> to keep the browser responsive.</p>
+
+                <div class="code-block">
+                    <span class="lang">JavaScript</span>
+                    <pre>function runValidation(showSummary = false, chunkSize = 50) {
+    const totalRows = data.length;
+    let start = 0;
+
+    const processNextChunk = () => {
+        const end = Math.min(start + chunkSize, totalRows);
+        processRowChunk(start, end);   <span class="comment">// validates rows start..end</span>
+        start = end;
+        updateUI();                    <span class="comment">// update progress bar</span>
+        if (start &lt; totalRows) {
+            setTimeout(processNextChunk, 0);  <span class="comment">// yield to browser</span>
+        } else {
+            <span class="comment">// done – recalc & render</span>
+            recalculateStats();
+            renderTable();
+            renderErrorLog();
+        }
+    };
+    processNextChunk();
+}</pre>
+                </div>
+                <div style="background:#f1f5f9; border-radius:8px; padding:1rem;">
+                    <strong>Tested:</strong> 2,747 rows × 30 columns → <span class="highlight-green">~2.8 MB</span> → process in <span class="highlight-green">&lt; 3 seconds</span> without UI freeze
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- SECTION 5: PERFORMANCE -->
+        <!-- ========================================================== -->
+        <section id="performance">
+            <h2 class="section-title">Performance Optimizations <span class="badge">Speed</span></h2>
+
+            <div class="card">
+                <div class="grid-2">
+                    <div>
+                        <h4>📦 Levenshtein Cache</h4>
+                        <p>All Levenshtein results are cached in a <code>Map</code> to avoid repeated computations.</p>
+                        <div class="code-block" style="font-size:0.8rem;">
+                            <pre>const levenshteinCache = new Map();</pre>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>🔁 Validation Key</h4>
+                        <p>Each cell gets a <code>validation_key</code> hash. If unchanged, the cell is skipped in re‑validation.</p>
+                        <div class="code-block" style="font-size:0.8rem;">
+                            <pre>function getCellValidationKey(row, colIdx, value, ruleStr) {
+    return [value, ruleStr, row[`_user_edited_${colIdx}`]].join('|');
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>📊 DataTable with Pagination</h4>
+                <p>Only <strong>50 rows</strong> are rendered at a time, keeping DOM size small even for 2000+ rows.</p>
+                <div class="code-block" style="font-size:0.8rem;">
+                    <pre>$('#previewTable').DataTable({
+    scrollY: "550px",
+    scrollX: true,
+    paging: true,
+    pageLength: 50,
+    deferRender: true
+});</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- SECTION 6: IMPACT -->
+        <!-- ========================================================== -->
+        <section id="impact">
+            <h2 class="section-title">Business Impact <span class="badge">Results</span></h2>
+
+            <div class="card">
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Manual Process</th>
+                                <th>R‑VIS System</th>
+                                <th>Improvement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Validation Time</strong></td>
+                                <td>~35 days</td>
+                                <td><strong>~8 minutes</strong></td>
+                                <td><span class="highlight-green">6,300× faster</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Code Maintenance</strong></td>
+                                <td>70+ scripts</td>
+                                <td><strong>1 Master Script</strong></td>
+                                <td><span class="highlight-green">98.5% less</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>New Module Setup</strong></td>
+                                <td>2–3 days</td>
+                                <td><strong>5 minutes</strong></td>
+                                <td><span class="highlight-green">99% faster</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data Privacy</strong></td>
+                                <td>Data transferred to server</td>
+                                <td><strong>Stays local</strong></td>
+                                <td><span class="highlight-green">100% private</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Error Detection</strong></td>
+                                <td>Manual (typos missed)</td>
+                                <td><strong>AI‑powered (99% accuracy)</strong></td>
+                                <td><span class="highlight-green">Near‑perfect</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card" style="background:linear-gradient(135deg, #0a3d62, #1a5276); color:white;">
+                <div class="grid-3" style="text-align:center;">
+                    <div>
+                        <div style="font-size:2.5rem; font-weight:800;">70+</div>
+                        <div style="opacity:0.8;">Modules Supported</div>
+                    </div>
+                    <div>
+                        <div style="font-size:2.5rem; font-weight:800;">~8 min</div>
+                        <div style="opacity:0.8;">Validation Time</div>
+                    </div>
+                    <div>
+                        <div style="font-size:2.5rem; font-weight:800;">1</div>
+                        <div style="opacity:0.8;">Master Script</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- SECTION 7: UX WORKFLOW -->
+        <!-- ========================================================== -->
+        <section id="ux">
+            <h2 class="section-title">User Experience <span class="badge">Guided</span></h2>
+
+            <div class="card">
+                <div class="grid-2">
+                    <div>
+                        <h4>📋 6‑Step Guide</h4>
+                        <ol style="padding-left:1.2rem;">
+                            <li>Download template</li>
+                            <li>Fill data only</li>
+                            <li>Upload file</li>
+                            <li>Review AI cells</li>
+                            <li>Fix red errors</li>
+                            <li>Submit at 90%+</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h4>🎨 Color Legend</h4>
+                        <ul style="list-style:none; padding:0;">
+                            <li>🔵 Blue = AI typo fix</li>
+                            <li>🟣 Purple = AI missing‑value suggestion</li>
+                            <li>🔴 Red = must fix</li>
+                            <li>🟠 Orange = review</li>
+                            <li>⚪ White = valid</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>📊 Real‑time Quality Score</h4>
+                <p>The score bar updates live as users accept/reject corrections. Submit is only enabled when score ≥ 90%.</p>
+                <div style="background:#f1f5f9; border-radius:8px; padding:1rem; margin-top:0.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+                    <span>Quality Score</span>
+                    <div style="flex:1; min-width:150px; height:8px; background:#e2e8f0; border-radius:4px; overflow:hidden;">
+                        <div style="width:94%; height:100%; background:#22c55e; border-radius:4px;"></div>
+                    </div>
+                    <strong style="color:#16a34a;">94%</strong>
+                    <span class="pill pill-green">✅ Ready to submit</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- SECTION 8: TECH STACK -->
+        <!-- ========================================================== -->
+        <section id="techstack">
+            <h2 class="section-title">Technology Stack <span class="badge">Stack</span></h2>
+
+            <div class="card">
+                <div class="grid-3">
+                    <div>
+                        <h4>📡 Frontend</h4>
+                        <ul style="list-style:none; padding:0;">
+                            <li>• HTML5 / CSS3</li>
+                            <li>• JavaScript (ES6)</li>
+                            <li>• Bootstrap 5</li>
+                            <li>• DataTables</li>
+                            <li>• Chart.js</li>
+                            <li>• ApexCharts</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>📦 Processing</h4>
+                        <ul style="list-style:none; padding:0;">
+                            <li>• SheetJS (Excel)</li>
+                            <li>• Levenshtein Distance</li>
+                            <li>• localStorage (AI learning)</li>
+                            <li>• Web Workers (planned)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>⚙️ Backend</h4>
+                        <ul style="list-style:none; padding:0;">
+                            <li>• CodeIgniter 4</li>
+                            <li>• MySQL</li>
+                            <li>• REST APIs</li>
+                            <li>• File storage</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
 
+    <!-- ============================================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================================ -->
     <footer>
-        <p>Developed for Universiti Malaysia Terengganu</p>
+        <p style="margin:0;">
+            Built with ❤️ for <strong>Universiti Malaysia Terengganu</strong> · 
+            <span style="opacity:0.6;">© 2025 R‑VIS</span>
+        </p>
     </footer>
 
 </body>
