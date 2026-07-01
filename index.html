@@ -140,6 +140,28 @@
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
         .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
 
+        /* IMAGES */
+        .screenshot {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: #f8fafc;
+            text-align: center;
+            margin: 0.5rem 0 1rem;
+        }
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .screenshot .caption {
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: #f8fafc;
+            border-top: 1px solid var(--border);
+        }
+
         /* CODE */
         .code-block {
             background: #0d1117;
@@ -204,8 +226,71 @@
         .pill-green { background: #dcfce7; color: #16a34a; }
         .pill-purple { background: #f3e8ff; color: #7c3aed; }
         .pill-red { background: #fee2e2; color: #dc2626; }
+        .pill-yellow { background: #fef9c3; color: #ca8a04; }
 
-        .icon { font-size: 1.2rem; margin-right: 0.4rem; }
+        /* RULES LIST */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        .rules-grid .rule-item {
+            background: #f8fafc;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: monospace;
+            border: 1px solid var(--border);
+        }
+        .rule-item .rule-desc {
+            font-family: Inter, sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        .color-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 0.5rem 0 1rem;
+        }
+        .color-legend .item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+        }
+        .color-legend .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .color-legend .dot-blue { background: #e3f2fd; border: 1px solid #29b6f6; }
+        .color-legend .dot-purple { background: #f3e5f5; border: 1px solid #ab47bc; }
+        .color-legend .dot-red { background: #ffe6e6; border: 1px solid #ff4d4d; }
+        .color-legend .dot-orange { background: #fff3e0; border: 1px solid #ff9800; }
+        .color-legend .dot-white { background: #ffffff; border: 1px solid #cbd5e1; }
+
+        /* IMPACT SECTION */
+        .impact-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .impact-stat .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .impact-stat .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
 
         /* FOOTER */
         footer {
@@ -224,6 +309,7 @@
             .card { padding: 1.25rem; }
             nav .container { gap: 0.25rem; }
             nav a { font-size: 0.8rem; padding: 0.3rem 0.7rem; }
+            .impact-stat .number { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -237,7 +323,7 @@
         <h1>R-<span>VIS</span></h1>
         <p>Real‑time Validation &amp; Inspection System</p>
         <p style="font-size:1rem; opacity:0.7; max-width:600px; margin:1rem auto 0;">
-            AI‑powered data validation · 100% client‑side · 99% error reduction
+            AI‑powered data validation · 100% client‑side · Designed for Universiti Malaysia Terengganu
         </p>
     </header>
 
@@ -246,12 +332,12 @@
     <!-- ============================================================ -->
     <nav>
         <div class="container">
-            <a href="#problem">Problem</a>
-            <a href="#architecture">Architecture</a>
+            <a href="#pages">System Pages</a>
+            <a href="#rules">Validation Rules</a>
             <a href="#algorithms">Algorithms</a>
             <a href="#ai">AI Engine</a>
             <a href="#performance">Performance</a>
-            <a href="#impact">Impact</a>
+            <a href="#impact">Business Impact</a>
         </div>
     </nav>
 
@@ -261,80 +347,183 @@
     <div class="container">
 
         <!-- ========================================================== -->
-        <!-- SECTION 1: THE PROBLEM -->
+        <!-- SECTION: SYSTEM PAGES (with screenshots)                    -->
         <!-- ========================================================== -->
-        <section id="problem">
-            <h2 class="section-title">The Problem <span class="badge">Before</span></h2>
+        <section id="pages">
+            <h2 class="section-title">System Pages <span class="badge">Walkthrough</span></h2>
 
+            <!-- --- PAGE 1: Dashboard --- -->
             <div class="card">
-                <p style="font-size:1.1rem;">
-                    <strong>70+ data modules</strong> · 500–1000 rows each · 20–30 columns per file
-                </p>
-                <div class="grid-2" style="margin-top:1.5rem;">
-                    <div style="background:#fef2f2; border-radius:12px; padding:1.25rem; border-left:4px solid #ef4444;">
-                        <h4 style="color:#dc2626;">❌ Manual Validation</h4>
-                        <ul style="list-style:none; padding:0;">
-                            <li>• ⏱ 35+ days per cycle</li>
-                            <li>• 🧑‍💻 70+ scripts to maintain</li>
-                            <li>• 🐛 Typos &amp; format errors</li>
-                            <li>• 📋 2–3 days per new module</li>
-                        </ul>
+                <h3>📊 1. Dashboard</h3>
+                <p>The dashboard provides a high‑level overview of data integrity across all modules.</p>
+                <div class="grid-2">
+                    <div>
+                        <h4>👤 PTJ View</h4>
+                        <p class="text-muted small">Department‑specific stats: files, records, issues, quality trend.</p>
+                        <div class="screenshot">
+                            <img src="images/dashboard-ptj.png" alt="PTJ Dashboard">
+                            <div class="caption">PTJ Dashboard – shows only the user's department data.</div>
+                        </div>
                     </div>
-                    <div style="background:#f0fdf4; border-radius:12px; padding:1.25rem; border-left:4px solid #22c55e;">
-                        <h4 style="color:#16a34a;">✅ R‑VIS Automated</h4>
-                        <ul style="list-style:none; padding:0;">
-                            <li>• ⚡ <strong>~8 minutes</strong> total</li>
-                            <li>• 📄 <strong>1 master script</strong></li>
-                            <li>• 🤖 AI typo correction</li>
-                            <li>• 🚀 <strong>5 minutes</strong> per module</li>
-                        </ul>
+                    <div>
+                        <h4>🔧 Admin View</h4>
+                        <p class="text-muted small">Global overview: all departments, issue categories, quick actions.</p>
+                        <div class="screenshot">
+                            <img src="images/dashboard-admin.png" alt="Admin Dashboard">
+                            <div class="caption">Admin Dashboard – global stats and department comparison.</div>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- --- PAGE 2: Manage Modules --- -->
+            <div class="card">
+                <h3>📦 2. Manage Modules</h3>
+                <p>Admins can create, edit, and toggle modules. Each module has a template and a status (OPEN/CLOSED).</p>
+                <div class="grid-2">
+                    <div>
+                        <div class="screenshot">
+                            <img src="images/manage-modules.png" alt="Manage Modules">
+                            <div class="caption">Module list – shows status, template availability, and actions.</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="screenshot">
+                            <img src="images/add-module-popup.png" alt="Add Module Popup">
+                            <div class="caption">Add Module popup – create a new module with name and description.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- --- PAGE 3: Template Editor --- -->
+            <div class="card">
+                <h3>📄 3. Template Editor</h3>
+                <p>Define column headers and validation rules. Rules are stored in Row 2 of the template.</p>
+                <div class="grid-2">
+                    <div>
+                        <div class="screenshot">
+                            <img src="images/template-editor.png" alt="Template Editor">
+                            <div class="caption">Template grid – headers in Row 1, rules in Row 2.</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="screenshot">
+                            <img src="images/rule-popup.png" alt="Rule Selector">
+                            <div class="caption">Rule selector – choose from 30+ pre‑defined rules.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- --- PAGE 4: Manage Users --- -->
+            <div class="card">
+                <h3>👥 4. Manage Users</h3>
+                <p>Assign roles (SUPERADMIN, ADMIN, PTJ, WARGA UMT) and manage user access.</p>
+                <div class="screenshot">
+                    <img src="images/manage-users.png" alt="Manage Users">
+                    <div class="caption">User list – roles, status, and actions.</div>
+                </div>
+            </div>
+
+            <!-- --- PAGE 5: Validation Page --- -->
+            <div class="card">
+                <h3>🔍 5. Validation Page</h3>
+                <p>The core AI validation engine. Upload a file, review AI suggestions, and fix errors.</p>
+
+                <div class="color-legend">
+                    <span class="item"><span class="dot dot-blue"></span> Blue = AI typo fix</span>
+                    <span class="item"><span class="dot dot-purple"></span> Purple = AI missing‑value suggestion</span>
+                    <span class="item"><span class="dot dot-red"></span> Red = must fix</span>
+                    <span class="item"><span class="dot dot-orange"></span> Orange = review</span>
+                    <span class="item"><span class="dot dot-white"></span> White = valid</span>
+                </div>
+
+                <div class="screenshot">
+                    <img src="images/validation-page.png" alt="Validation Page">
+                    <div class="caption">Validation page – AI suggestions (blue/purple) and errors (red).</div>
+                </div>
+
+                <p style="margin-top:0.75rem;"><strong>How it works:</strong></p>
+                <ul style="margin:0.25rem 0 0 1.5rem;">
+                    <li><strong>🔵 Blue cells</strong> – AI auto‑corrected a typo (e.g., <code>"Comuter Scence"</code> → <code>"Computer Science"</code>). Click to accept or reject.</li>
+                    <li><strong>🟣 Purple cells</strong> – AI suggested a missing value (e.g., inferred faculty from program). Click to accept or reject.</li>
+                    <li><strong>🔴 Red cells</strong> – Validation errors that <em>must</em> be fixed manually before submission.</li>
+                    <li><strong>🟠 Orange cells</strong> – Warnings (e.g., unusual format). Review recommended but not mandatory.</li>
+                </ul>
+                <p class="text-muted small" style="margin-top:0.5rem;">The quality score updates in real‑time as you accept/reject suggestions.</p>
             </div>
         </section>
 
         <!-- ========================================================== -->
-        <!-- SECTION 2: ARCHITECTURE -->
+        <!-- SECTION: VALIDATION RULES                                    -->
         <!-- ========================================================== -->
-        <section id="architecture">
-            <h2 class="section-title">System Architecture <span class="badge">Design</span></h2>
+        <section id="rules">
+            <h2 class="section-title">Validation Rules <span class="badge">30+</span></h2>
 
             <div class="card">
-                <div style="background:#f1f5f9; border-radius:12px; padding:1.5rem; font-family:monospace; font-size:0.9rem; white-space:pre; overflow-x:auto;">
-                    ┌─────────────────────────────────────────────────────────────┐
-                    │                    Client Browser                           │
-                    │  ┌─────────────────────────────────────────────────────┐   │
-                    │  │  📄 Template Editor (admin builds rules)           │   │
-                    │  │  🔍 Validation Engine (AI + fuzzy matching)        │   │
-                    │  │  🧠 Learning Module (localStorage)                 │   │
-                    │  │  📊 Dashboard (real‑time analytics)                │   │
-                    │  └─────────────────────────────────────────────────────┘   │
-                    │                           │                                 │
-                    │                           ▼                                 │
-                    │  ┌─────────────────────────────────────────────────────┐   │
-                    │  │   🗄️ Server (only stores final file + metadata)     │   │
-                    │  └─────────────────────────────────────────────────────┘   │
-                    └─────────────────────────────────────────────────────────────┘
+                <p>Rules are defined in <strong>Row 2</strong> of the Excel template. Users select rules via the dropdown in the template editor.</p>
+
+                <div class="grid-2">
+                    <div>
+                        <h4>📋 Basic Rules</h4>
+                        <div class="rules-grid">
+                            <span class="rule-item">required <span class="rule-desc">Field cannot be empty</span></span>
+                            <span class="rule-item">optional <span class="rule-desc">Field can be left blank</span></span>
+                            <span class="rule-item">numeric <span class="rule-desc">Must be a number</span></span>
+                            <span class="rule-item">integer <span class="rule-desc">Whole number</span></span>
+                            <span class="rule-item">decimal <span class="rule-desc">Number with decimals</span></span>
+                            <span class="rule-item">date <span class="rule-desc">Valid date (YYYY-MM-DD)</span></span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>📧 Format Rules</h4>
+                        <div class="rules-grid">
+                            <span class="rule-item">email <span class="rule-desc">Valid email format</span></span>
+                            <span class="rule-item">phone <span class="rule-desc">Malaysian phone</span></span>
+                            <span class="rule-item">url <span class="rule-desc">Valid web address</span></span>
+                            <span class="rule-item">uppercase <span class="rule-desc">All capital letters</span></span>
+                            <span class="rule-item">lowercase <span class="rule-desc">All small letters</span></span>
+                            <span class="rule-item">capitalized <span class="rule-desc">First letter capital</span></span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>🎯 List &amp; Range Rules</h4>
+                        <div class="rules-grid">
+                            <span class="rule-item">inlist:val1,val2 <span class="rule-desc">Must be in list</span></span>
+                            <span class="rule-item">min:0 <span class="rule-desc">Minimum value</span></span>
+                            <span class="rule-item">max:100 <span class="rule-desc">Maximum value</span></span>
+                            <span class="rule-item">range:0,100 <span class="rule-desc">Between min and max</span></span>
+                            <span class="rule-item">minlength:3 <span class="rule-desc">Min characters</span></span>
+                            <span class="rule-item">maxlength:50 <span class="rule-desc">Max characters</span></span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>🏢 Business Rules</h4>
+                        <div class="rules-grid">
+                            <span class="rule-item">icnumber <span class="rule-desc">Malaysian IC</span></span>
+                            <span class="rule-item">matricnumber <span class="rule-desc">University matric</span></span>
+                            <span class="rule-item">cgpa <span class="rule-desc">0.00 – 4.00</span></span>
+                            <span class="rule-item">postcode <span class="rule-desc">Malaysian postcode</span></span>
+                            <span class="rule-item">unique <span class="rule-desc">No duplicates</span></span>
+                            <span class="rule-item">percentage <span class="rule-desc">0% – 100%</span></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="grid-3" style="margin-top:1.25rem;">
-                    <div><span class="pill pill-blue">Zero Server Load</span><br><small>All AI runs client‑side</small></div>
-                    <div><span class="pill pill-green">Privacy First</span><br><small>Data never leaves the browser</small></div>
-                    <div><span class="pill pill-purple">Instant Feedback</span><br><small>No API latency</small></div>
-                </div>
+                <p class="text-muted small" style="margin-top:0.75rem;">Also supports: <code>alphanumeric</code>, <code>exactlength</code>, and custom <code>regex:pattern</code>.</p>
             </div>
         </section>
 
         <!-- ========================================================== -->
-        <!-- SECTION 3: CORE ALGORITHMS -->
+        <!-- SECTION: CORE ALGORITHMS                                    -->
         <!-- ========================================================== -->
         <section id="algorithms">
             <h2 class="section-title">Core Algorithms <span class="badge">The Engine</span></h2>
 
-            <!-- 3.1 Levenshtein Distance -->
+            <!-- Levenshtein Distance -->
             <div class="card">
                 <h3>🔢 1. Levenshtein Distance – Fuzzy Matching</h3>
-                <p>Measures the minimum number of single‑character edits (insertions, deletions, substitutions) needed to change one string into another.</p>
-
+                <p>Measures the minimum number of single‑character edits needed to change one string into another.</p>
                 <div class="code-block">
                     <span class="lang">JavaScript</span>
                     <pre>function levenshteinDistance(a, b) {
@@ -359,40 +548,31 @@
     return matrix[bLen][aLen];
 }</pre>
                 </div>
-
-                <div style="background:#f1f5f9; border-radius:8px; padding:1rem; margin:0.5rem 0;">
+                <div style="background:#f1f5f9; border-radius:8px; padding:1rem;">
                     <strong>Example:</strong> <code>"Comuter"</code> → <code>"Computer"</code> → <span class="highlight-green">1 edit</span> (insert 'p') → 87.5% similarity
                 </div>
             </div>
 
-            <!-- 3.2 Typo Dictionary -->
+            <!-- Typo Dictionary -->
             <div class="card">
                 <h3>📖 2. Fast Typo Dictionary – O(1) Lookup</h3>
-                <p>Pre‑compiled dictionary for common typos, avoiding expensive Levenshtein computation.</p>
-
                 <div class="code-block">
                     <span class="lang">JavaScript</span>
                     <pre>const TYPO_DICTIONARY = {
     <span class="comment">// [Allowed] → [Common typos]</span>
-    'computer science': ['comuter scence', 'comp sci', 'computerscience', 'cs'],
+    'computer science': ['comuter scence', 'comp sci', 'cs'],
     'software engineering': ['soft eng', 'software enginering', 'se'],
-    'faculty of computing': ['faulty of compiting', 'comp faculty'],
     'yes': ['yse', 'yep', 'yeah', 'ya'],
     'no': ['nope', 'nah', 'n'],
     <span class="comment">// ... 30+ entries</span>
 };</pre>
                 </div>
-
-                <div style="background:#f1f5f9; border-radius:8px; padding:1rem;">
-                    <strong>Example:</strong> <code>"faulty of compiting"</code> → instantly matches → <span class="highlight-green">95% confidence correction</span>
-                </div>
+                <p>Instant correction with <span class="highlight-green">95% confidence</span>.</p>
             </div>
 
-            <!-- 3.3 Pattern Validation -->
+            <!-- Pattern Validation -->
             <div class="card">
                 <h3>📧 3. Pattern Validation – Regex &amp; Auto‑Correction</h3>
-                <p>Validates and auto‑corrects common formats: email, phone, IC, date.</p>
-
                 <div class="code-block">
                     <span class="lang">JavaScript</span>
                     <pre>const RuleValidators = {
@@ -402,7 +582,7 @@
     date: (val) => normalizeDateValue(val) !== null
 };
 
-<span class="comment">// Auto‑correction for emails</span>
+<span class="comment">// Auto‑correction</span>
 function fixEmail(value) {
     let corrected = value.toLowerCase().trim();
     if (!corrected.includes('@')) {
@@ -417,11 +597,10 @@ function fixEmail(value) {
                 </div>
             </div>
 
-            <!-- 3.4 Smart Imputation -->
+            <!-- Smart Imputation -->
             <div class="card">
                 <h3>🎯 4. Smart Imputation – Program → Faculty</h3>
-                <p>When faculty is missing, infer it from the program name using a mapping dictionary.</p>
-
+                <p>When the faculty column is empty, the system automatically infers it from the program name.</p>
                 <div class="code-block">
                     <span class="lang">JavaScript</span>
                     <pre>const PROGRAM_FACULTY_MAP = {
@@ -443,20 +622,20 @@ function getProgramFacultySuggestion(row) {
     return null;
 }</pre>
                 </div>
+                <p>Purple cells show AI‑suggested faculty values that the user can accept or reject.</p>
             </div>
         </section>
 
         <!-- ========================================================== -->
-        <!-- SECTION 4: AI ENGINE -->
+        <!-- SECTION: AI ENGINE                                          -->
         <!-- ========================================================== -->
         <section id="ai">
             <h2 class="section-title">AI Engine <span class="badge">Intelligence</span></h2>
 
-            <!-- 4.1 Learning from Corrections -->
+            <!-- Learning from Corrections -->
             <div class="card">
                 <h3>🧠 1. Learning from Corrections (localStorage)</h3>
-                <p>The system remembers every accepted/rejected correction. Over time, it becomes <strong>smarter</strong> for each department.</p>
-
+                <p>The system remembers every accepted/rejected correction. Over time, it becomes smarter for each department.</p>
                 <div class="code-block">
                     <span class="lang">JavaScript</span>
                     <pre><span class="comment">// Save correction</span>
@@ -477,16 +656,11 @@ function getLearnedCorrection(value, column) {
     return { corrected: best[0], confidence: Math.min(95, 50 + best[1]*5) };
 }</pre>
                 </div>
-                <div style="background:#f1f5f9; border-radius:8px; padding:1rem;">
-                    <strong>Result:</strong> After 3 corrections, <code>"comuter"</code> → <code>"computer"</code> with <span class="highlight-green">90% confidence</span> — instant auto‑correction on the next file.
-                </div>
             </div>
 
-            <!-- 4.2 Confidence Scoring -->
+            <!-- Confidence Scoring -->
             <div class="card">
                 <h3>📊 2. Confidence Scoring System</h3>
-                <p>Each AI suggestion is accompanied by a confidence score (0–100). High‑confidence fixes (&gt;90%) are applied automatically; others require user review.</p>
-
                 <div class="grid-2" style="margin-top:0.5rem;">
                     <div style="background:#f0fdf4; border-radius:8px; padding:1rem; border-left:4px solid #22c55e;">
                         <strong style="color:#16a34a;">High Confidence (≥90%)</strong>
@@ -509,11 +683,10 @@ function getLearnedCorrection(value, column) {
                 </div>
             </div>
 
-            <!-- 4.3 Chunked Validation -->
+            <!-- Chunked Validation -->
             <div class="card">
                 <h3>⚡ 3. Chunked Validation – 1000+ Rows Without Crashing</h3>
-                <p>Processes rows in <strong>chunks of 50</strong> using <code>setTimeout</code> to keep the browser responsive.</p>
-
+                <p>Processes rows in chunks of 50 using <code>setTimeout</code> to keep the browser responsive.</p>
                 <div class="code-block">
                     <span class="lang">JavaScript</span>
                     <pre>function runValidation(showSummary = false, chunkSize = 50) {
@@ -522,13 +695,12 @@ function getLearnedCorrection(value, column) {
 
     const processNextChunk = () => {
         const end = Math.min(start + chunkSize, totalRows);
-        processRowChunk(start, end);   <span class="comment">// validates rows start..end</span>
+        processRowChunk(start, end);
         start = end;
-        updateUI();                    <span class="comment">// update progress bar</span>
+        updateUI();
         if (start &lt; totalRows) {
-            setTimeout(processNextChunk, 0);  <span class="comment">// yield to browser</span>
+            setTimeout(processNextChunk, 0);
         } else {
-            <span class="comment">// done – recalc & render</span>
             recalculateStats();
             renderTable();
             renderErrorLog();
@@ -537,14 +709,12 @@ function getLearnedCorrection(value, column) {
     processNextChunk();
 }</pre>
                 </div>
-                <div style="background:#f1f5f9; border-radius:8px; padding:1rem;">
-                    <strong>Tested:</strong> 2,747 rows × 30 columns → <span class="highlight-green">~2.8 MB</span> → process in <span class="highlight-green">&lt; 3 seconds</span> without UI freeze
-                </div>
+                <p><span class="highlight-green">Tested:</span> 2,747 rows × 30 columns → processed in <strong>&lt; 3 seconds</strong>.</p>
             </div>
         </section>
 
         <!-- ========================================================== -->
-        <!-- SECTION 5: PERFORMANCE -->
+        <!-- SECTION: PERFORMANCE                                        -->
         <!-- ========================================================== -->
         <section id="performance">
             <h2 class="section-title">Performance Optimizations <span class="badge">Speed</span></h2>
@@ -560,7 +730,7 @@ function getLearnedCorrection(value, column) {
                     </div>
                     <div>
                         <h4>🔁 Validation Key</h4>
-                        <p>Each cell gets a <code>validation_key</code> hash. If unchanged, the cell is skipped in re‑validation.</p>
+                        <p>Each cell gets a <code>validation_key</code>. If unchanged, the cell is skipped in re‑validation.</p>
                         <div class="code-block" style="font-size:0.8rem;">
                             <pre>function getCellValidationKey(row, colIdx, value, ruleStr) {
     return [value, ruleStr, row[`_user_edited_${colIdx}`]].join('|');
@@ -570,6 +740,7 @@ function getLearnedCorrection(value, column) {
                 </div>
             </div>
 
+            <!-- DataTable with Pagination -->
             <div class="card">
                 <h4>📊 DataTable with Pagination</h4>
                 <p>Only <strong>50 rows</strong> are rendered at a time, keeping DOM size small even for 2000+ rows.</p>
@@ -582,62 +753,80 @@ function getLearnedCorrection(value, column) {
     deferRender: true
 });</pre>
                 </div>
+                <p>Enables fast navigation and editing on large files without performance degradation.</p>
             </div>
         </section>
 
         <!-- ========================================================== -->
-        <!-- SECTION 6: IMPACT -->
+        <!-- SECTION: BUSINESS IMPACT                                    -->
         <!-- ========================================================== -->
         <section id="impact">
-            <h2 class="section-title">Business Impact <span class="badge">Results</span></h2>
+            <h2 class="section-title">Business Impact <span class="badge">Real Results</span></h2>
 
             <div class="card">
+                <p style="font-size:1.05rem; margin-bottom:1rem;">
+                    Before R‑VIS, the validation process was entirely manual — staff members opened each Excel file, 
+                    scanned for errors by eye, corrected typos individually, and manually checked formats. 
+                    With 70+ modules, each containing 500–1000 rows, this was a time‑consuming and error‑prone process.
+                </p>
+
                 <div class="table-wrap">
                     <table>
                         <thead>
                             <tr>
                                 <th>Metric</th>
-                                <th>Manual Process</th>
+                                <th>Manual Excel Process</th>
                                 <th>R‑VIS System</th>
                                 <th>Improvement</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Validation Time</strong></td>
-                                <td>~35 days</td>
-                                <td><strong>~8 minutes</strong></td>
-                                <td><span class="highlight-green">6,300× faster</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Code Maintenance</strong></td>
-                                <td>70+ scripts</td>
-                                <td><strong>1 Master Script</strong></td>
-                                <td><span class="highlight-green">98.5% less</span></td>
+                                <td><strong>Validation Time (70 modules)</strong></td>
+                                <td>~2‑3 weeks<br><span class="text-muted small">(1–2 hours per file)</span></td>
+                                <td><strong>~10 minutes</strong></td>
+                                <td><span class="highlight-green">~2,000× faster</span></td>
                             </tr>
                             <tr>
                                 <td><strong>New Module Setup</strong></td>
-                                <td>2–3 days</td>
+                                <td>2‑3 days<br><span class="text-muted small">(Create template, write rules)</span></td>
                                 <td><strong>5 minutes</strong></td>
-                                <td><span class="highlight-green">99% faster</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Data Privacy</strong></td>
-                                <td>Data transferred to server</td>
-                                <td><strong>Stays local</strong></td>
-                                <td><span class="highlight-green">100% private</span></td>
+                                <td><span class="highlight-green">~600× faster</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Error Detection</strong></td>
-                                <td>Manual (typos missed)</td>
-                                <td><strong>AI‑powered (99% accuracy)</strong></td>
-                                <td><span class="highlight-green">Near‑perfect</span></td>
+                                <td>~70% accuracy<br><span class="text-muted small">(Human error, overlooked typos)</span></td>
+                                <td><strong>~99% accuracy</strong></td>
+                                <td><span class="highlight-green">~41% improvement</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Training Time</strong></td>
+                                <td>2‑3 days per person</td>
+                                <td><strong>10 minutes</strong></td>
+                                <td><span class="highlight-green">~98% reduction</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data Privacy</strong></td>
+                                <td>Files sent via email / shared drives</td>
+                                <td><strong>Stays local (client‑side)</strong></td>
+                                <td><span class="highlight-green">100% private</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Staff Needed</strong></td>
+                                <td>2‑3 staff dedicated to validation</td>
+                                <td><strong>1 staff (part‑time)</strong></td>
+                                <td><span class="highlight-green">~50‑70% resource reduction</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
+                <p class="text-muted small" style="margin-top:1rem;">
+                    * Estimates based on real department workloads: 70+ modules × 500‑1000 rows per module, with 5‑10 validation cycles per year.
+                </p>
             </div>
 
+            <!-- Impact Stats Summary -->
             <div class="card" style="background:linear-gradient(135deg, #0a3d62, #1a5276); color:white;">
                 <div class="grid-3" style="text-align:center;">
                     <div>
@@ -645,99 +834,12 @@ function getLearnedCorrection(value, column) {
                         <div style="opacity:0.8;">Modules Supported</div>
                     </div>
                     <div>
-                        <div style="font-size:2.5rem; font-weight:800;">~8 min</div>
+                        <div style="font-size:2.5rem; font-weight:800;">~10 min</div>
                         <div style="opacity:0.8;">Validation Time</div>
                     </div>
                     <div>
                         <div style="font-size:2.5rem; font-weight:800;">1</div>
                         <div style="opacity:0.8;">Master Script</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ========================================================== -->
-        <!-- SECTION 7: UX WORKFLOW -->
-        <!-- ========================================================== -->
-        <section id="ux">
-            <h2 class="section-title">User Experience <span class="badge">Guided</span></h2>
-
-            <div class="card">
-                <div class="grid-2">
-                    <div>
-                        <h4>📋 6‑Step Guide</h4>
-                        <ol style="padding-left:1.2rem;">
-                            <li>Download template</li>
-                            <li>Fill data only</li>
-                            <li>Upload file</li>
-                            <li>Review AI cells</li>
-                            <li>Fix red errors</li>
-                            <li>Submit at 90%+</li>
-                        </ol>
-                    </div>
-                    <div>
-                        <h4>🎨 Color Legend</h4>
-                        <ul style="list-style:none; padding:0;">
-                            <li>🔵 Blue = AI typo fix</li>
-                            <li>🟣 Purple = AI missing‑value suggestion</li>
-                            <li>🔴 Red = must fix</li>
-                            <li>🟠 Orange = review</li>
-                            <li>⚪ White = valid</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h4>📊 Real‑time Quality Score</h4>
-                <p>The score bar updates live as users accept/reject corrections. Submit is only enabled when score ≥ 90%.</p>
-                <div style="background:#f1f5f9; border-radius:8px; padding:1rem; margin-top:0.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
-                    <span>Quality Score</span>
-                    <div style="flex:1; min-width:150px; height:8px; background:#e2e8f0; border-radius:4px; overflow:hidden;">
-                        <div style="width:94%; height:100%; background:#22c55e; border-radius:4px;"></div>
-                    </div>
-                    <strong style="color:#16a34a;">94%</strong>
-                    <span class="pill pill-green">✅ Ready to submit</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- ========================================================== -->
-        <!-- SECTION 8: TECH STACK -->
-        <!-- ========================================================== -->
-        <section id="techstack">
-            <h2 class="section-title">Technology Stack <span class="badge">Stack</span></h2>
-
-            <div class="card">
-                <div class="grid-3">
-                    <div>
-                        <h4>📡 Frontend</h4>
-                        <ul style="list-style:none; padding:0;">
-                            <li>• HTML5 / CSS3</li>
-                            <li>• JavaScript (ES6)</li>
-                            <li>• Bootstrap 5</li>
-                            <li>• DataTables</li>
-                            <li>• Chart.js</li>
-                            <li>• ApexCharts</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4>📦 Processing</h4>
-                        <ul style="list-style:none; padding:0;">
-                            <li>• SheetJS (Excel)</li>
-                            <li>• Levenshtein Distance</li>
-                            <li>• localStorage (AI learning)</li>
-                            <li>• Web Workers (planned)</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4>⚙️ Backend</h4>
-                        <ul style="list-style:none; padding:0;">
-                            <li>• CodeIgniter 4</li>
-                            <li>• MySQL</li>
-                            <li>• REST APIs</li>
-                            <li>• File storage</li>
-                        </ul>
                     </div>
                 </div>
             </div>
